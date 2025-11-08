@@ -29,7 +29,7 @@ body {
 
 button{
   font-size: 25px;
-  border: none;
+  /* border: none; */
 }
 
 #digits {
