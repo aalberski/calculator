@@ -24,7 +24,7 @@ function calculate(left, right, operator){
     if(right == ""){
         return left;
     }
-    switch(operator){
+    switch(operator.id){
         case("divide"):
             if(right == 0){
                 alert("You know you can't do that.");
@@ -59,7 +59,7 @@ digits.forEach((digit) =>{
 
 operators.forEach((operator) =>{
     operator.addEventListener('click', () =>{
-        lastOperator = operator.id;
+        lastOperator = operator;
         right = "";
         display.textContent = operator.textContent;
     })
@@ -92,7 +92,13 @@ decimal.addEventListener('click', ()=>{
 del.addEventListener('click', ()=>{
     if(right != ""){
         right = right.slice(0, -1);
-        display.textContent = right;
+        if(right == ""){
+            display.textContent = lastOperator.textContent;
+        }
+        else{
+            display.textContent = right;
+        }
+        
     }
     else if(lastOperator != null){
         lastOperator = null;
@@ -100,6 +106,11 @@ del.addEventListener('click', ()=>{
     }
     else if(left != ""){
         left = left.slice(0, -1);
-        display.textContent = left;
+        if(left == ""){
+            display.textContent = 0;
+        }
+        else{
+            display.textContent = left;
+        }
     }
 })
