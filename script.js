@@ -10,6 +10,14 @@ const del = document.querySelector("#delete");
 let left = "";
 let right = "";
 let lastOperator = null;
+result = null;
+
+function clearCalculator(){
+    left = "";
+    right = "";
+    lastOperator = null;
+    result = null;
+}
 
 
 function calculate(left, right, operator){
@@ -20,9 +28,7 @@ function calculate(left, right, operator){
         case("divide"):
             if(right == 0){
                 alert("You know you can't do that.");
-                left = "";
-                right = "";
-                lastOperator = "";
+                clearCalculator();
                 break;
             }
             return Number(left) / Number(right);
@@ -37,6 +43,9 @@ function calculate(left, right, operator){
 
 digits.forEach((digit) =>{
     digit.addEventListener('click', () =>{
+        if(result != null){
+            clearCalculator();
+        }
         if(lastOperator == null){
             left = left + digit.textContent;
             display.textContent = left;
@@ -58,15 +67,14 @@ operators.forEach((operator) =>{
 
 equals.addEventListener('click', ()=>{
     left = calculate(left, right, lastOperator);
+    result = left;
     if(left != null){
-        display.textContent = left;
+        display.textContent = result;
     }
 })
 
 clear.addEventListener('click', ()=>{
-    left = "";
-    right = "";
-    lastOperator = null;
+    clearCalculator();
     display.textContent = '0';
 })
 
